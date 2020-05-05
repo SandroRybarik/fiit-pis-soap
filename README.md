@@ -12,3 +12,28 @@ user settings pridat pre twig emmet support.
   "twig": "html"
 },
 ```
+
+
+## snippets
+
+routes/
+```js
+const express = require('express');
+const router = express.Router();
+
+/* GET */
+router.get('/', function(req, res, next) {
+  res.send("HELLO!");
+});
+
+module.exports = router;
+```
+
+pages/
+```twig
+{% extends "../../base.twig" %}
+
+{% block content %}
+  HTML here
+{% endblock %}
+```
