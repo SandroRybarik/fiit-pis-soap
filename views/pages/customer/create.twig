@@ -1,5 +1,56 @@
 {% extends "../../base.twig" %}
 
 {% block content %}
+	<div class="container">
+		<div class="col-md-6 offset-md-3">
+			<form class="border p-3 bg-light" method="POST" action="/customer">
+				<div class="form-group">
+					<label for="name">name</label>
+					<input name="name" id="name" type="text" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label for="surname">surname</label>
+					<input name="surname" id="surname" type="text" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label for="email">email</label>
+					<input name="email" id="email" type="text" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label for="gender">gender</label>
+					<input name="gender" id="gender" type="text" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label for="currency">currency</label>
+					<input name="currency" id="currency" type="text" class="form-control" required>
+				</div>
 
+				{# <div class="form-group">
+					<label for="coord_lat">coord_lat</label>
+					<input name="coord_lat" id="coord_lat" type="number" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label for="coord_lon">coord_lon</label>
+					<input name="coord_lon" id="coord_lon" type="number" class="form-control" required>
+				</div> #}
+				<div class="form-group">
+					<label for="city">Mesto</label>
+					<select id="city" name="city" class="form-control">
+						<option value="">Vyberte mesto</option>
+						<option value="Bratislava">Bratislava</option>
+						<option value="Košice">Košice</option>
+						<option value="Pieštany">Pieštany</option>
+						<option value="Nová Baňa">Nová Baňa</option>
+						<option value="Komárno">Komárno</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label for="born_at">born_at</label>
+					<input name="born_at" id="born_at" type="date" class="form-control" required>
+				</div>
+        <button type="submit" class="btn-primary btn">Vytvorit</button>
+			</form>
+		</div>
+	</div>
 {% endblock %}
