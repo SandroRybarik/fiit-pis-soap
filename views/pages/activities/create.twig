@@ -1,0 +1,66 @@
+{% extends "../../base.twig" %}
+
+{% block content %}
+<div class="container">
+  <div class="col-md-6 offset-md-3">
+    <form class="border p-3 bg-light" method="POST" action="/activities">
+      <legend class="text-center mb-5"> Vytvorenie cvičenia </legend>
+
+      <div class="row">
+        <div class="col">
+          <label for="start_time">Začiatok cvičenia čas</label>
+          <input name="start_time" id="start_time" type="time" class="form-control" placeholder="11:00" required>
+        </div>
+        <div class="col">
+          <label for="start_date">Začiatok cvičenia (dástum)</label>
+          <input name="start_date" id="start_date" type="date" class="form-control" placeholder="20.3.2020" required>
+        </div>
+      </div>
+      
+      <div class="row mt-3">
+        <div class="col">
+          <label for="end_time">Koniec cvičenia čas</label>
+          <input name="end_time" id="end_time"type="time" class="form-control" placeholder="12:00" required>
+        </div>
+        <div class="col">
+          <label for="end_date">Koniec cvičenia (dátum)</label>
+          <input name="end_date" id="end_date" type="date" class="form-control" placeholder="20.3.2020" required>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="form-group">
+        <label for="trainer_id">Tréner</label>
+        <select class="form-control" name="trainer_id" id="trainer_id" required>
+          <option value="1">One</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="" for="room_id">Miestnosť cvičenia</label>
+        <select class="form-control" name="room_id" id="room_id" required>
+          <option value="1">One</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="" for="activity_type_id">Typ cvičenia</label>
+        <select class="form-control" name="activity_type_id" id="activity_type_id" required>
+          <option value="1">One</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="" for="branch_id">Pobočka, ked bude tréning prebiehať</label>
+        <select class="form-control" name="branch_id" id="branch_id" required>
+          <option value="1">One</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary mb-2">VYTVORIŤ CVIČENIE</button>
+    </form>
+  </div>
+</div>  
+
+{% endblock %}
