@@ -10,7 +10,7 @@ router.get('/create', function(req, res, next) {
 // CREATE
 router.post('/', function(req, res, next) {
 
-  soapRequest(wsdl.activities, {
+  soapRequest(wsdl.activity, {
     activity: {
       name: null,
       start_date: null,
