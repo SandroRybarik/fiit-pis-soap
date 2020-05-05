@@ -37,3 +37,9 @@ pages/
   HTML here
 {% endblock %}
 ```
+
+npm run form
+```
+int id
+string name
+```

@@ -8,7 +8,7 @@ function prepareInput(input) {
   .split("\n")
   .filter(l => l !== '')
   .map(l => l.split(" ").filter(p => p !== ''))
-  .map(l => ({ type: l[0], name: l[1] }))
+  .map(([type, name]) => ({ type, name}))
 }
 
 /**
@@ -30,7 +30,7 @@ function formField ({ type, name }) {
       </select>
     </div>
     `.trim()
-  } else if (isDate(name)){
+  } else if (isDate(name) || type == 'dateTime'){
     return `
     <div class="form-group">
       <label for="${name}">${name}</label>
