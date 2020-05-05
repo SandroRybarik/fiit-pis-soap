@@ -7,7 +7,7 @@ var twig = require('twig')
 twig.cache(false)
 
 var indexRouter = require('./routes/index');
-const activitiesRouter = require('./routes/activities')
+const activityRouter = require('./routes/activity')
 const customerRouter = require('./routes/customer')
 
 
@@ -26,7 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/activities', activitiesRouter)
+app.use('/activity', activityRouter)
 app.use('/customer', customerRouter)
 
 // catch 404 and forward to error handler

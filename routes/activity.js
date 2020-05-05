@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const { soapRequest, wsdl } = require('./../lib/soap')
+const { soapRequest, wsdl } = require('../lib/soap')
 
 /* GET home page. */
 router.get('/create', function(req, res, next) {
-  res.render('pages/activities/create', { title: 'Express' })
+  res.render('pages/activity/create', { title: 'Express' })
 })
 
 // CREATE
 router.post('/', function(req, res, next) {
 
   soapRequest(wsdl.activities, {
-    activities: {
+    activity: {
       name: null,
       start_date: null,
       end_date: null,
