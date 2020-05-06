@@ -5,7 +5,10 @@
   <div class="col-md-6 offset-md-3">
     <form class="border p-3 bg-light" method="POST" action="/activity">
       <legend class="text-center mb-5"> Vytvorenie cvičenia </legend>
-
+      <div class="form-group">
+        <label for="name">Názov</label>
+        <input name="name" id="name" type="text" class="form-control" required>
+      </div>
       <div class="row">
         <div class="col">
           <label for="start_time">Začiatok cvičenia čas</label>
@@ -47,14 +50,18 @@
       <div class="form-group">
         <label class="" for="activity_type_id">Typ cvičenia</label>
         <select class="form-control" name="activity_type_id" id="activity_type_id" required>
-          <option value="1">One</option>
+          <option value="">Vyberte možnosť</option>
+          {% for opt in activity_types %}
+            <option value="{{ opt.id }}">{{ opt.name|e }}</option>
+          {% endfor %}
         </select>
       </div>
 
       <div class="form-group">
         <label class="" for="branch_id">Pobočka, kde bude tréning prebiehať</label>
         <select class="form-control" name="branch_id" id="branch_id" required>
-          <option value="1">One</option>
+          <option value="">Vyberte možnosť</option>
+          <option value="1">Bratislava I</option>
         </select>
       </div>
 

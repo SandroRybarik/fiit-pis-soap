@@ -12,7 +12,8 @@ const auth = require('./lib/auth')
 // Routers
 const {
   activityRouter,
-  customerRouter
+  customerRouter,
+  activityTypeRouter
 } = require('./routes')
 
 
@@ -55,6 +56,7 @@ app.use(passport.session());
 
 app.use('/activity', activityRouter)
 app.use('/customer', customerRouter)
+app.use('/activityType', activityTypeRouter)
 
 
 

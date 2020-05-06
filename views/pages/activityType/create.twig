@@ -1,0 +1,29 @@
+{% extends "../../base.twig" %}
+
+{% block content %}
+<div class="container">
+	<div class="col-md-6 offset-md-3">
+		<form class="border p-3 bg-light" method="POST" action="/activityType">
+			<legend class="text-center mb-5"> Vytvorenie typu cvičenia </legend>
+			<div class="form-group">
+				<label for="name">name</label>
+				<input name="name" id="name" type="text" class="form-control" required>
+			</div>
+			<div class="form-group">
+				<label for="price">price</label>
+				<input name="price" id="price" type="number" class="form-control" required>
+			</div>
+			<div class="form-group">
+				<label for="capacity">capacity</label>
+				<input name="capacity" id="capacity" type="number" class="form-control" required>
+			</div>
+			<div class="form-group">
+				<label for="description">description</label>
+				<input name="description" id="description" type="text" class="form-control" required>
+			</div>
+
+			<button type="submit" class="btn btn-primary">Vytvoriť</button>
+		</form>
+	</div>
+</div>
+{% endblock %}
