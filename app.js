@@ -45,7 +45,9 @@ app.use(session({
   secret: config.SESSION_SECRET_KEY,
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
+  cookie: { 
+    // secure: true 
+  }
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
@@ -56,15 +58,17 @@ app.use('/activity', activityRouter)
 app.use('/customer', customerRouter)
 
 
-app.post(
-  '/login',
-  passport.authenticate('local', { successRedirect: '/', failureRedirect: '/customer/login' }));
-
-
-
-app.use((req, res, next) => {
-  console.log(req.isAuthenticated())
-  next()
+app.post('/login', 
+  passport.authenticate(
+    'local',
+    { 
+      successRedirect: '/',
+      failureRedirect: '/customer/login'
+    }
+  )
+)
+app.get('/', (req, res) => {
+  res.send(`<h1>Vitajte</h1>${JSON.stringify(req.user)}`)
 })
 
 // catch 404 and forward to error handler
