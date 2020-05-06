@@ -1,0 +1,45 @@
+{% extends "../../base.twig" %}
+
+{% block content %}
+<div class="container">
+		<div style="padding-top:5%; padding-bottom:4%px color:black">
+			<h1 style="font-size:70px">Fitness.sk</h1>
+		</div>
+		<h5 style="color:#808080">Vitajte na portáli Fitness.sk</h5>
+		<div style="position=relative; padding-left:44%; padding-top:5%">
+			<img src="logo1.png" alt="Logo" height="550" width="800"></img>
+		</div>
+		<button type="button" name="regBtn" formtarget="_self" 
+			style="position:absolute; top:70px; left:1300px;
+				background-color: #4CAF50;
+				border: none;
+				color: white;
+				padding: 15px 38px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				font-size: 20px;">
+			Registrovať
+		</button>
+		<button type="button" name="loginBtn" formtarget="_self" 
+			style="position:absolute; top:70px; left:1100px;
+				background-color: #e7e7e7;
+				border: none;
+				color: black;
+				padding: 15px 52px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				font-size: 20px;">
+			Prihlásiť
+		</button>
+		<div style="position:absolute; top:450px;">
+			<h1>Poskytujeme:</h1>
+			 <ul style="list-style-type:disc; font-size:30px; padding-left:30%; padding-top:5%">
+			  <li>Tréningy</li>
+			  <li>Cvičenia</li>
+			  <li>Masáže</li>
+			</ul> 
+		</div>
+    </div>
+{% endblock %}
