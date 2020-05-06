@@ -53,9 +53,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 app.use('/activity', activityRouter)
 app.use('/customer', customerRouter)
+
 
 
 app.post('/login', 
@@ -70,6 +70,8 @@ app.post('/login',
 app.get('/', (req, res) => {
   res.send(`<h1>Vitajte</h1>${JSON.stringify(req.user)}`)
 })
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
