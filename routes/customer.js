@@ -1,17 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const { soapRequest, wsdl } = require('../lib/soap')
-
+const passport = require('passport')
 /* GET home page. */
 router.get('/create', (req, res, next) => {
+    console.log(req.user)
   res.render('pages/customer/create')
 });
 
 router.get('/login', (_, res) => {
   res.render('pages/customer/login')
 })
-
-router.post('/login', (req, res) => {})
 
 router.post('/', (req, res) => {
   const {

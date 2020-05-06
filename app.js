@@ -1,19 +1,37 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var twig = require('twig')
-twig.cache(false)
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const twig = require('twig')
+const session = require('express-session')
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy;
+const config = require('./config')
+const auth = require('./lib/auth')
+// Routers
+const {
+  activityRouter,
+  customerRouter
+} = require('./routes')
 
-var indexRouter = require('./routes/index');
-const activityRouter = require('./routes/activity')
-const customerRouter = require('./routes/customer')
 
 
-var app = express();
+//http://www.passportjs.org/docs/username-password/
+passport.use(new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password',
+  session: true
+}, auth.strategy));
+
+
+passport.serializeUser(auth.passportSerialize);
+passport.deserializeUser(auth.passportDeserialize);
+
+const app = express();
 
 // view engine setup
+twig.cache(false)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'twig');
 app.set('cache', false);
@@ -23,11 +41,31 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({
+  secret: config.SESSION_SECRET_KEY,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use('/', indexRouter);
+
 app.use('/activity', activityRouter)
 app.use('/customer', customerRouter)
+
+
+app.post(
+  '/login',
+  passport.authenticate('local', { successRedirect: '/', failureRedirect: '/customer/login' }));
+
+
+
+app.use((req, res, next) => {
+  console.log(req.isAuthenticated())
+  next()
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

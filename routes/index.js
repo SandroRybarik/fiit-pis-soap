@@ -1,9 +1,7 @@
-const express = require('express');
-const router = express.Router();
+const activityRouter = require('./activity')
+const customerRouter = require('./customer')
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.send("HELLO!");
-});
-
-module.exports = router;
+module.exports = {
+  activityRouter,
+  customerRouter
+};

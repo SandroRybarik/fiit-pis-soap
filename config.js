@@ -1,4 +1,5 @@
-const { 
+const {
+  SESSION_SECRET_KEY,
   TEAM_ID,
   TEAM_PASSWORD, 
   WSDL_ACTIVITY,
@@ -13,6 +14,7 @@ const {
 
 
 module.exports = {
+  SESSION_SECRET_KEY,
   TEAM_ID,
   TEAM_PASSWORD,
   WSDL_ACTIVITY,
