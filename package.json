@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "dev": "nodemon -r dotenv/config app.js",
     "start": "node -r dotenv/config ./bin/www",
     "form": "node ./bin/form-builder.js"
   },
@@ -19,6 +20,7 @@
     "twig": "~0.10.3"
   },
   "devDependencies": {
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.3"
   }
 }
