@@ -68,7 +68,7 @@ app.post('/login',
   )
 )
 app.get('/', (req, res) => {
-  res.send(`<h1>Vitajte</h1>${JSON.stringify(req.user)}`)
+  res.render('pages/root/index')
 })
 
 
