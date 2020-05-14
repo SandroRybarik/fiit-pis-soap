@@ -7,10 +7,30 @@ router.get("/create", function (req, res, next) {
 
   const getAllActivityTypes = () => soapRequest(wsdl.activity_type, "getAll", {});
 
+  const dataMockup = {
+    trainers: [
+      { name: "Matej Lošický", id: 10 },
+      { name: "Roman Marek", id: 11 },
+      { name: "Ivana Lumanová", id: 1 }
+    ],
+    rooms: [
+      { name: 'Miestnosť S1', id: 1 },
+      { name: 'Miestnosť M1', id: 2 },
+      { name: 'Miestnosť M2', id: 3 },
+      { name: 'Miestnosť L1', id: 4 },
+      { name: 'Miestnosť L2', id: 5 },
+    ],
+    branches: [
+      { name: 'Bratislava I', id: 1 },
+      { name: 'Bratislava II', id: 2 },
+      { name: 'Košice', id: 3 }
+    ]
+  }
+
   getAllActivityTypes()
     .then(({activity_types}) => {
       console.log(activity_types)
-      res.render("pages/activity/create", { activity_types: activity_types.activity_type });
+      res.render("pages/activity/create", { activity_types: activity_types.activity_type, ...dataMockup });
     })
     .catch(console.log)
 
@@ -23,7 +43,7 @@ router.get("/", function (req, res, next) {
     .then(({ activitys }) => {
       console.log(activitys);
       res.render("pages/activity/show_all", {
-        activities: activitys != null ? activitys.activity : [],
+        activities: activitys != null ? activitys.activity.filter(a => a.confirmed) : [],
       });
     })
     .catch(console.log);
@@ -39,9 +59,10 @@ router.post("/", function (req, res, next) {
     trainer_id,
     room_id,
     branch_id,
-    confirmed,
   } = req.body;
 
+  // Simulate approval process
+  const confirmed = Math.random() > 0.5 ? true : false
 
   const createActivity = () => 
     soapRequest(

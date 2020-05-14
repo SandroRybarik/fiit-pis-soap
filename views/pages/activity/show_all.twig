@@ -8,7 +8,11 @@
             <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{ activity.name }}</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text">
+                    Dátum: {{ activity.start_date |date("d/m/Y")}} <br>
+                    Čas začiatku: {{ activity.start_date |date("H:i:s") }}<br>
+                    Čas konca: {{ activity.end_date |date("H:i:s") }}<br>
+                </p>
                 <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
             </div>

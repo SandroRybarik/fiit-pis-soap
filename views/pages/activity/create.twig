@@ -9,26 +9,15 @@
         <label for="name">Názov</label>
         <input name="name" id="name" type="text" class="form-control" required>
       </div>
-      <div class="row">
-        <div class="col">
-          <label for="start_time">Začiatok cvičenia čas</label>
-          <input name="start_time" id="start_time" type="time" class="form-control" placeholder="11:00" required>
-        </div>
-        <div class="col">
-          <label for="start_date">Začiatok cvičenia (dátum)</label>
-          <input name="start_date" id="start_date" type="date" class="form-control" placeholder="20.3.2020" required>
-        </div>
+
+      <div class="form-group">
+        <label for="start_date">Začiatok cvičenia</label>
+        <input name="start_date" id="start_date" type="datetime-local" class="form-control" required>
       </div>
-      
-      <div class="row mt-3">
-        <div class="col">
-          <label for="end_time">Koniec cvičenia čas</label>
-          <input name="end_time" id="end_time"type="time" class="form-control" placeholder="12:00" required>
-        </div>
-        <div class="col">
-          <label for="end_date">Koniec cvičenia (dátum)</label>
-          <input name="end_date" id="end_date" type="date" class="form-control" placeholder="20.3.2020" required>
-        </div>
+
+      <div class="form-group">
+        <label for="end_date">Koniec cvičenia</label>
+        <input name="end_date" id="end_date" type="datetime-local" class="form-control" required>
       </div>
 
       <hr>
@@ -36,14 +25,20 @@
       <div class="form-group">
         <label for="trainer_id">Tréner</label>
         <select class="form-control" name="trainer_id" id="trainer_id" required>
-          <option value="1">One</option>
+          <option value="">Vyberte možnosť</option>
+          {% for opt in trainers %}
+            <option value="{{ opt.id }}">{{ opt.name|e }}</option>
+          {% endfor %}
         </select>
       </div>
 
       <div class="form-group">
         <label class="" for="room_id">Miestnosť cvičenia</label>
         <select class="form-control" name="room_id" id="room_id" required>
-          <option value="1">One</option>
+          <option value="">Vyberte možnosť</option>
+          {% for opt in rooms %}
+            <option value="{{ opt.id }}">{{ opt.name|e }}</option>
+          {% endfor %}
         </select>
       </div>
 
@@ -61,7 +56,9 @@
         <label class="" for="branch_id">Pobočka, kde bude tréning prebiehať</label>
         <select class="form-control" name="branch_id" id="branch_id" required>
           <option value="">Vyberte možnosť</option>
-          <option value="1">Bratislava I</option>
+          {% for opt in branches %}
+            <option value="{{ opt.id }}">{{ opt.name|e }}</option>
+          {% endfor %}
         </select>
       </div>
 
