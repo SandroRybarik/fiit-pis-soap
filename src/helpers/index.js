@@ -4,7 +4,7 @@ const {
     invalidDateOrder,
     collisionRoomAndDate,
     collisionTrainer
-  } = require('./acitivityValidator')
+  } = require('./acitivityValidation')
 
 
 module.exports = {

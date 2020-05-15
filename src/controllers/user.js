@@ -1,5 +1,6 @@
 const { soapRequest, wsdl } = require("../lib/soap");
 const { validateEmail } = require("../helpers");
+const config = require('../../config')
 
 const login = async (email, password, done) => {
   // vytvori session
@@ -42,7 +43,7 @@ const create = async (req, res) => {
 };
 
 const showCreate = (req, res) => {
-  res.render("pages/user/create");
+  res.render("pages/user/create", {roles: Object.keys(config.roles).map(r => r[0].toUpperCase() + r.slice(1).toLowerCase())});
 };
 
 const showLogin = (req, res) => {

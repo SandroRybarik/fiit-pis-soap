@@ -26,5 +26,9 @@ module.exports = {
   WSDL_RESERVATION,
   WSDL_CUSTOMER,
   WSDL_VALIDATOR,
-  WSDL_CITIES_SK
+  WSDL_CITIES_SK,
+  roles: {
+    ADMIN: 1,
+    USER: 0
+  }
 }
