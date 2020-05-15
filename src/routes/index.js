@@ -1,9 +1,9 @@
 const activityRouter = require('./activity')
-const customerRouter = require('./customer')
 const  activityTypeRouter = require('./activityType')
+const userRouter = require('./user')
 
 module.exports = {
   activityRouter,
-  customerRouter,
+  userRouter,
   activityTypeRouter
 };

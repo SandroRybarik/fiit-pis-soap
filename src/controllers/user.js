@@ -34,3 +34,9 @@ const showCreate = (req, res) => {
 const showLogin = (req, res) => {
   res.render('pages/customer/login')
 }
+
+module.exports = {
+  showLogin,
+  showCreate,
+  create
+}
