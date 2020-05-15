@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon -r dotenv/config app.js",
     "start": "node -r dotenv/config ./bin/www",
-    "form": "node ./bin/form-builder.js"
+    "form": "node ./src/bin/form-builder.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
