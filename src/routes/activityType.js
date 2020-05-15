@@ -6,7 +6,7 @@ const {
 } = require("../controllers/activityType");
 
 /* GET */
-router.get("/create", createActivityType);
-router.post("/", showCreateActivityType);
+router.get("/create", showCreateActivityType);
+router.post("/", createActivityType);
 
 module.exports = router;
