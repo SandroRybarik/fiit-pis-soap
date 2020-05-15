@@ -65,7 +65,7 @@ app.post('/login',
     'local',
     { 
       successRedirect: '/',
-      failureRedirect: '/login'
+      failureRedirect: '/user/login'
     }
   )
 )

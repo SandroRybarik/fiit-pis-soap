@@ -16,6 +16,7 @@ const auth = {
 const soapRequest = (url, func, payload) => new Promise((resolve, reject) => {
   console.log(
     {
+      url,
       func,
       ...auth,
       ...payload
