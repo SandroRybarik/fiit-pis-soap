@@ -1,11 +1,33 @@
 const { soapRequest, wsdl } = require("../lib/soap");
 
+const dataMockup = {
+  trainers: [
+    { name: "Matej Lošický", id: 10 },
+    { name: "Roman Marek", id: 11 },
+    { name: "Ivana Lumanová", id: 1 }
+  ],
+  rooms: [
+    { name: 'Miestnosť S1', id: 1 },
+    { name: 'Miestnosť M1', id: 2 },
+    { name: 'Miestnosť M2', id: 3 },
+    { name: 'Miestnosť L1', id: 4 },
+    { name: 'Miestnosť L2', id: 5 },
+  ],
+  branches: [
+    { name: 'Bratislava I', id: 1 },
+    { name: 'Bratislava II', id: 2 },
+    { name: 'Košice', id: 3 }
+  ]
+}
+
+
 const showCreateActivity = async (_, res) => {
   try {
     const { activity_types } = await soapRequest(wsdl.activity_type, "getAll", {});
     console.log(activity_types);
     res.render("pages/activity/create", {
       activity_types: activity_types.activity_type,
+      ...dataMockup
     });
   } catch (error) {
     console.log(error);
