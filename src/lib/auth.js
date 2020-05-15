@@ -4,7 +4,8 @@ const { login } = require("../controllers/user");
 const passportDeserialize = async (id, done) => {
   console.log("passportDeserialize", id);
   const { user } = await soapRequest(wsdl.user, "getById", { id });
-  done(null, customer);
+  console.log(user)
+  done(null, user);
 };
 
 const passportSerialize = async (user, done) => {
