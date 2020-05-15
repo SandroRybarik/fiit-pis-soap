@@ -12,7 +12,7 @@ const auth = require('./src/lib/auth')
 // Routers
 const {
   activityRouter,
-  customerRouter,
+  userRouter,
   activityTypeRouter
 } = require('./src/routes')
 
@@ -55,7 +55,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/activity', activityRouter)
-app.use('/customer', customerRouter)
+app.use('/user', userRouter)
 app.use('/activityType', activityTypeRouter)
 
 
@@ -65,7 +65,7 @@ app.post('/login',
     'local',
     { 
       successRedirect: '/',
-      failureRedirect: '/customer/login'
+      failureRedirect: '/login'
     }
   )
 )

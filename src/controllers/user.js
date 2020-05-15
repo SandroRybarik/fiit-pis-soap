@@ -28,11 +28,11 @@ const create = async (req, res) => {
 };
 
 const showCreate = (req, res) => {
-  res.render('pages/customer/create')
+  res.render('pages/user/create')
 }
 
 const showLogin = (req, res) => {
-  res.render('pages/customer/login')
+  res.render('pages/user/login')
 }
 
 module.exports = {
