@@ -1,0 +1,26 @@
+{% extends "../../base.twig" %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-6 offset-md-3">
+      <form class="border p-3 bg-light" method="POST" action="/user">
+        <div class="form-group">
+      <label for="name">name</label>
+      <input name="name" id="name" type="text" class="form-control" required>
+    </div><div class="form-group">
+      <label for="email">email</label>
+      <input name="email" id="email" type="text" class="form-control" required>
+    </div><div class="form-group">
+      <label for="password">password</label>
+      <input name="password" id="password" type="text" class="form-control" required>
+    </div><div class="form-group">
+      <label for="phone_number">phone_number</label>
+      <input name="phone_number" id="phone_number" type="text" class="form-control" required>
+    </div><div class="form-group">
+      <label for="country_code">country_code</label>
+      <input name="country_code" id="country_code" type="text" class="form-control" required>
+    </div>
+      </form>
+    </div>
+</div>
+{% endblock %}
