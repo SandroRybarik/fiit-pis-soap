@@ -23,12 +23,7 @@ router.post('/', (req, res) => {
     born_at
   } = req.body;
 
-  const validateEmail = () =>
-    soapRequest(
-      wsdl.validator, 
-      'validateEmail', 
-      { email }
-    )
+  
   
   const resolveCityByName = ( name ) => 
       soapRequest(

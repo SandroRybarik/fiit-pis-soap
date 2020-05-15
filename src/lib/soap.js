@@ -40,7 +40,8 @@ wsdl = {
   reservation: config.WSDL_RESERVATION,
   customer: config.WSDL_CUSTOMER,
   validator: config.WSDL_VALIDATOR,
-  cities_sk: config.WSDL_CITIES_SK
+  cities_sk: config.WSDL_CITIES_SK,
+  user: config.WSDL_USER
 }
 
 module.exports = {
