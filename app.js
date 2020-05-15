@@ -8,13 +8,13 @@ const session = require('express-session')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy;
 const config = require('./config')
-const auth = require('./lib/auth')
+const auth = require('./src/lib/auth')
 // Routers
 const {
   activityRouter,
   customerRouter,
   activityTypeRouter
-} = require('./routes')
+} = require('./src/routes')
 
 
 
@@ -33,7 +33,7 @@ const app = express();
 
 // view engine setup
 twig.cache(false)
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'src', 'views'));
 app.set('view engine', 'twig');
 app.set('cache', false);
 app.disable('view cache');
