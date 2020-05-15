@@ -1,8 +1,13 @@
 <nav class="navbar navbar-light bg-light mb-5">
   <a class="navbar-brand">Fitness.sk</a>
-  <div>
-    <a href="/activity" class="btn btn-primary mx-1">Ísť na</a>
-    <a href="/customer/login" class="btn btn-info mx-1">Prihlásiť sa</a>
-    <a href="/customer/create" class="btn btn-success mx-1">Registrovať</a>
-  </div>
+  {% if user == null %}
+    <div>
+      <a href="/user/login" class="btn btn-info mx-1">Prihlásiť sa</a>
+      <a href="/user/create" class="btn btn-success mx-1">Registrovať</a>
+    </div>
+  {% else %}
+    <div>
+      <a href="/logout" class="btn btn-success mx-1">Odhlásiť sa</a>
+    </div>
+  {% endif %}
 </nav>
