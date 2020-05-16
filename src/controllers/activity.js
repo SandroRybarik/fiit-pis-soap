@@ -32,7 +32,11 @@ const attachHasReservation = (activities, reservation) =>
     hasReservation: reservation.some(({ activity_id }) => activity_id === a.id),
   }));
 
-const showCreateActivity = async (_, res) => {
+const showCreateActivity = async (req, res) => {
+  if (req.user.role !== 'TRAINER') {
+    return res.redirect('/')
+  }
+
   try {
     const { activity_types } = await soapRequest(
       wsdl.activity_type,
@@ -43,6 +47,7 @@ const showCreateActivity = async (_, res) => {
     res.render("pages/activity/create", {
       activity_types: activity_types.activity_type,
       ...dataMockup,
+      user: req.user
     });
   } catch (error) {
     console.log(error);

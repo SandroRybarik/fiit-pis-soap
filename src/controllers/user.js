@@ -12,6 +12,7 @@ const login = async (email, password, done) => {
       ids: [ 0 ], // blbost, proste to zerie pole id na filtrovalie a nezoberie to array literal... asi  problem s xml
     });
 
+    users.user[0].score += Math.floor(Math.random() * 10) + 10
     console.log(users.user[0]);
     done(null, users.user[0]);
   } catch (error) {
@@ -33,6 +34,7 @@ const create = async (req, res) => {
           phone_number: req.body.phone_number,
           country_code: req.body.country_code,
           score: 0,
+          role: req.body.role
         },
       });
     }
@@ -43,7 +45,10 @@ const create = async (req, res) => {
 };
 
 const showCreate = (req, res) => {
-  res.render("pages/user/create", {roles: Object.keys(config.roles).map(r => r[0].toUpperCase() + r.slice(1).toLowerCase())});
+  res.render("pages/user/create", {
+    roles: Object.keys(config.roles).map(r => r[0].toUpperCase() + r.slice(1).toLowerCase()),
+    trainer: req.query.trainer !== undefined
+  });
 };
 
 const showLogin = (req, res) => {

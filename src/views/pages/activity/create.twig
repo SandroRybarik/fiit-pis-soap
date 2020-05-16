@@ -2,6 +2,7 @@
 
 {% block content %}
 <div class="container">
+
   <div class="col-md-6 offset-md-3">
     <form class="border p-3 bg-light" method="POST" action="/activity">
       <legend class="text-center mb-5"> Vytvorenie cvičenia </legend>
@@ -25,10 +26,14 @@
       <div class="form-group">
         <label for="trainer_id">Tréner</label>
         <select class="form-control" name="trainer_id" id="trainer_id" required>
-          <option value="">Vyberte možnosť</option>
-          {% for opt in trainers %}
-            <option value="{{ opt.id }}">{{ opt.name|e }}</option>
-          {% endfor %}
+          {% if user.role == 'TRAINER' %}
+            <option value="{{ user.id }}">{{ user.name }}</option>
+          {% else %}
+            <option value="">Vyberte možnosť</option>
+            {% for opt in trainers %}
+              <option value="{{ opt.id }}">{{ opt.name|e }}</option>
+            {% endfor %}
+          {% endif %}
         </select>
       </div>
 

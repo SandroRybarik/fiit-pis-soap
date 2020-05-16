@@ -1,34 +1,40 @@
 {% extends "../../base.twig" %}
 
 {% block content %}
-<div class="container">
-    <div class="col-md-6 offset-md-3">
-      <form class="border p-3 bg-light" method="POST" action="/user">
-        <div class="form-group">
-      <label for="name">name</label>
-      <input name="name" id="name" type="text" class="form-control" required>
-    </div><div class="form-group">
-      <label for="email">email</label>
-      <input name="email" id="email" type="text" class="form-control" required>
-    </div><div class="form-group">
-      <label for="password">password</label>
-      <input name="password" id="password" type="text" class="form-control" required>
-    </div><div class="form-group">
-      <label for="phone_number">phone_number</label>
-      <input name="phone_number" id="phone_number" type="text" class="form-control" required>
-    </div><div class="form-group">
-      <label for="country_code">country_code</label>
-      <input name="country_code" id="country_code" type="text" class="form-control" required>
-    </div><div class="form-group">
-      <label for="role">role</label>
-      <select class="form-control" name="role" id="role" required>
-          <option value="">Vyberte možnosť</option>
-          {% for role in roles %}
-            <option value="{{ role }}">{{ role }}</option>
-          {% endfor %}
-    </div>
-    <button type="submit" class="btn btn-primary">Register</button>
-      </form>
-    </div>
-</div>
+	<div class="container">
+		<div class="col-md-6 offset-md-3">
+			<form class="border p-3 bg-light" method="POST" action="/user">
+				<div class="form-group">
+					<label for="name">Meno</label>
+					<input name="name" id="name" type="text" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input name="email" id="email" type="email" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label for="password">Heslo</label>
+					<input name="password" id="password" type="password" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label for="phone_number">Tel. číslo</label>
+					<input name="phone_number" id="phone_number" type="tel" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label for="country_code">Kód krajiny</label>
+					<input name="country_code" id="country_code" type="text" class="form-control" placeholder="SK" value="SK" required>
+				</div>
+
+        {% if trainer %}
+				<div class="form-group">
+					<label for="role">role</label>
+					<input name="role" id="role" type="text" class="form-control" value="TRAINER" disabled required>
+				</div>
+        {% else %}
+					<input name="role" id="role" type="hidden" class="form-control" value="USER" disabled required>
+        {% endif %}
+				<button type="submit" class="btn btn-primary">Register</button>
+			</form>
+		</div>
+	</div>
 {% endblock %}
