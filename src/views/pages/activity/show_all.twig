@@ -2,21 +2,57 @@
 
 {% block content %}
 
-<div class="row">
-    {% for activity in activities %}
-        <div class="col-sm-6">
-            <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{{ activity.name }}</h5>
-                <p class="card-text">
-                    Dátum: {{ activity.start_date |date("d/m/Y")}} <br>
-                    Čas začiatku: {{ activity.start_date |date("H:i:s") }}<br>
-                    Čas konca: {{ activity.end_date |date("H:i:s") }}<br>
-                </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-            </div>
-        </div>
-    {% endfor %}
+<div class="container">
+  <div class="alert alert-success d-none" role="alert">
+    Úspešne ste sa prihlásili na cvičenie.
+  </div>
+  <div class="alert alert-warning d-none" role="alert">
+    Nastala chyba pri prihlásovaní na cvičenie.<br>
+    Skúste to znova.
+  </div>
 </div>
+
+<div class="row">  
+  {% for activity in activities %}
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ activity.name }}</h5>
+          <p class="card-text">
+            Dátum: {{ activity.start_date |date("d/m/Y")}} <br>
+            Čas začiatku: {{ activity.start_date |date("H:i:s") }}<br>
+            Čas konca: {{ activity.end_date |date("H:i:s") }}<br>
+          </p>
+          <button type="button" onclick="createReservation({{activity.id}})" class="btn btn-primary">Idem</button>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+  function createReservation(id) {
+    console.log(+id)
+    fetch('/reservation', 
+      {
+        method: 'post',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          activity_id: +id
+        })
+      }
+    )
+    .then(res => {
+      $('.alert.alert-success').show()
+    })
+    .catch(err => {
+      $('.alert.alert-warning').show()
+    })
+  }
+  
+</script>
 {% endblock %}
