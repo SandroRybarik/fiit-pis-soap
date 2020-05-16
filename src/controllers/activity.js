@@ -34,15 +34,42 @@ const showCreateActivity = async (_, res) => {
   }
 };
 
-const showAllActivities = async (_, res) => {
+const showAllActivities = async (req, res) => {
+  const userId = req.user.id
+
   try {
     const { activitys } = await soapRequest(wsdl.activity, "getAll", {});
     console.log(activitys);
+
+    const result = await soapRequest(wsdl.reservation, "getByAttributeValue", {
+      attribute_name: "user_id",
+      attribute_value: userId,
+      ids: [0]
+    })
+
+    /**
+     * Attach hasReservation to activity object in activities
+     * hasReservation is determined by user_id
+     * @param {*} activities 
+     * @param {*} reservation 
+     */
+    const attachHasReservation = (activities, reservation) => 
+      activities.map(a => ({
+          ...a,
+          hasReservation: reservation
+            .filter(r => r.user_id === userId && r.activity_id === a.id)
+            .length !== 0
+        })
+      )
+    
+    console.log(attachHasReservation(activitys.activity, result.reservations.reservation))
+    
     res.render("pages/activity/show_all", {
-      activities: activitys != null ? activitys.activity : [],
+      activities: activitys != null ? attachHasReservation(activitys.activity, result.reservations.reservation)  : [],
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    res.render("error")
   }
 };
 

@@ -2,19 +2,9 @@
 
 {% block content %}
 
-<div class="container">
-  <div class="alert alert-success d-none" role="alert">
-    Úspešne ste sa prihlásili na cvičenie.
-  </div>
-  <div class="alert alert-warning d-none" role="alert">
-    Nastala chyba pri prihlásovaní na cvičenie.<br>
-    Skúste to znova.
-  </div>
-</div>
-
 <div class="row">  
   {% for activity in activities %}
-    <div class="col-sm-6">
+    <div class="col-sm-6 my-3">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">{{ activity.name }}</h5>
@@ -22,6 +12,9 @@
             Dátum: {{ activity.start_date |date("d/m/Y")}} <br>
             Čas začiatku: {{ activity.start_date |date("H:i:s") }}<br>
             Čas konca: {{ activity.end_date |date("H:i:s") }}<br>
+            {% if activity.hasReservation %}
+              <strong>Už ste prihlásený</strong>
+            {% endif %}
           </p>
           <button type="button" onclick="createReservation({{activity.id}})" class="btn btn-primary">Idem</button>
         </div>
@@ -47,10 +40,19 @@
       }
     )
     .then(res => {
-      $('.alert.alert-success').show()
+      if (res.status === 409) {
+        return flashMessage('info', 'Už ste na cvičenie prihlásený.')
+      } else if (!res.ok) {
+        throw res;
+      } else {
+        return res.json()
+      }
+    })
+    .then(json => {
+      flashMessage('success', 'Úspešne ste sa zaregistrovali na cvičenie.')
     })
     .catch(err => {
-      $('.alert.alert-warning').show()
+      flashMessage('danger', 'Nastala systémová chyba, opakujte prosím akciu znova.')
     })
   }
   
