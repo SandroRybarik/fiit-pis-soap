@@ -1,2 +1,3 @@
 const { soapRequest, wsdl } = require("../lib/soap");
-module.exports = () => soapRequest(wsdl.validator, "validateEmail", { email });
+module.exports = (email) =>
+  soapRequest(wsdl.validator, "validateEmail", { email });

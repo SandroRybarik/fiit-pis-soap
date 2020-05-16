@@ -1,11 +1,11 @@
 const activityRouter = require('./activity')
-const customerRouter = require('./customer')
 const activityTypeRouter = require('./activityType')
 const reservationRouter = require('./reservation')
+const userRouter = require('./user')
 
 module.exports = {
   activityRouter,
-  customerRouter,
   activityTypeRouter,
-  reservationRouter
+  reservationRouter,
+  userRouter
 };
