@@ -21,13 +21,17 @@ const dataMockup = {
 }
 
 
-const showCreateActivity = async (_, res) => {
+const showCreateActivity = async (req, res) => {
+  if (req.user.role !== 'trainer') {
+    return res.redirect('/')
+  }
+
   try {
     const { activity_types } = await soapRequest(wsdl.activity_type, "getAll", {});
-    console.log(activity_types);
     res.render("pages/activity/create", {
       activity_types: activity_types.activity_type,
-      ...dataMockup
+      ...dataMockup,
+      user: req.user
     });
   } catch (error) {
     console.log(error);
