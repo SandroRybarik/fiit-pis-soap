@@ -28,7 +28,8 @@
         {% if trainer %}
 				<div class="form-group">
 					<label for="role">role</label>
-					<input name="role" id="role" type="text" class="form-control" value="TRAINER" disabled required>
+					<input id="role" type="text" class="form-control" value="TRAINER" disabled required>
+          <input type="hidden" name="role" value="TRAINER">
 				</div>
         {% else %}
 					<input name="role" id="role" type="hidden" class="form-control" value="USER" disabled required>

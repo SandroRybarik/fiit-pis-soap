@@ -7,7 +7,23 @@
     </div>
   {% else %}
     <div>
+      {% if user.role == 'TRAINER' %}
+      <div class="dropdown d-inline">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Akcia
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="/activity/create">Vytvoriť aktivitu</a>
+          <a class="dropdown-item" href="/activityType/create">Vytvoriť typ aktivity</a>
+          <hr>
+          <a class="dropdown-item" href="/activity">Zobraziť aktivity</a>
+        </div>
+      </div>
+      {% else %}
+        <a href="/activity" class="btn mx-1">Isť na</a>
+      {% endif %}
       <a href="/logout" class="btn btn-success mx-1">Odhlásiť sa</a>
+      <span style="font-size: 7px">{{ user.role }}</span>
     </div>
   {% endif %}
 </nav>
