@@ -4,45 +4,77 @@ const dataMockup = {
   trainers: [
     { name: "Matej Lošický", id: 10 },
     { name: "Roman Marek", id: 11 },
-    { name: "Ivana Lumanová", id: 1 }
+    { name: "Ivana Lumanová", id: 1 },
   ],
   rooms: [
-    { name: 'Miestnosť S1', id: 1 },
-    { name: 'Miestnosť M1', id: 2 },
-    { name: 'Miestnosť M2', id: 3 },
-    { name: 'Miestnosť L1', id: 4 },
-    { name: 'Miestnosť L2', id: 5 },
+    { name: "Miestnosť S1", id: 1 },
+    { name: "Miestnosť M1", id: 2 },
+    { name: "Miestnosť M2", id: 3 },
+    { name: "Miestnosť L1", id: 4 },
+    { name: "Miestnosť L2", id: 5 },
   ],
   branches: [
-    { name: 'Bratislava I', id: 1 },
-    { name: 'Bratislava II', id: 2 },
-    { name: 'Košice', id: 3 }
-  ]
-}
+    { name: "Bratislava I", id: 1 },
+    { name: "Bratislava II", id: 2 },
+    { name: "Košice", id: 3 },
+  ],
+};
 
+/**
+ * Attach hasReservation to activity object in activities
+ * hasReservation is determined by user_id
+ * @param {*} activities
+ * @param {*} reservation
+ */
+const attachHasReservation = (activities, reservation) =>
+  activities.map((a) => ({
+    ...a,
+    hasReservation: reservation.some(({ activity_id }) => activity_id === a.id),
+  }));
 
 const showCreateActivity = async (_, res) => {
   try {
-    const { activity_types } = await soapRequest(wsdl.activity_type, "getAll", {});
+    const { activity_types } = await soapRequest(
+      wsdl.activity_type,
+      "getAll",
+      {}
+    );
     console.log(activity_types);
     res.render("pages/activity/create", {
       activity_types: activity_types.activity_type,
-      ...dataMockup
+      ...dataMockup,
     });
   } catch (error) {
     console.log(error);
   }
 };
 
-const showAllActivities = async (_, res) => {
+const showAllActivities = async (req, res) => {
+  const userId = req.user.id;
+
   try {
-    const { activitys } = await soapRequest(wsdl.activity, "getAll", {});
-    console.log(activitys);
+    const {
+      activitys: { activity = [] },
+    } = await soapRequest(wsdl.activity, "getAll", {});
+
+    const { reservations } = await soapRequest(
+      wsdl.reservation,
+      "getByAttributeValue",
+      {
+        attribute_name: "user_id",
+        attribute_value: userId,
+        ids: [0],
+      }
+    );
+
+    const {reservation = []} = reservations || {}
+    console.log(attachHasReservation(activity, reservation));
     res.render("pages/activity/show_all", {
-      activities: activitys != null ? activitys.activity : [],
+      activities: attachHasReservation(activity, reservation),
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    res.render("error");
   }
 };
 

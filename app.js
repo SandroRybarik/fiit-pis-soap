@@ -12,9 +12,12 @@ const auth = require("./src/lib/auth");
 // Routers
 const {
   activityRouter,
-  userRouter,
   activityTypeRouter,
-} = require("./src/routes");
+  reservationRouter,
+  userRouter
+} = require('./src/routes')
+
+
 
 //http://www.passportjs.org/docs/username-password/
 passport.use(
@@ -54,6 +57,7 @@ app.use(
     },
   })
 );
+
 app.use(express.static(path.join(__dirname, "public")));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -66,6 +70,7 @@ app.use((req, res, next) => {
 app.use("/activity", activityRouter);
 app.use("/user", userRouter);
 app.use("/activityType", activityTypeRouter);
+app.use('/reservation', reservationRouter)
 
 app.post(
   "/login",

@@ -2,21 +2,59 @@
 
 {% block content %}
 
-<div class="row">
-    {% for activity in activities %}
-        <div class="col-sm-6">
-            <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{{ activity.name }}</h5>
-                <p class="card-text">
-                    Dátum: {{ activity.start_date |date("d/m/Y")}} <br>
-                    Čas začiatku: {{ activity.start_date |date("H:i:s") }}<br>
-                    Čas konca: {{ activity.end_date |date("H:i:s") }}<br>
-                </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-            </div>
+<div class="row">  
+  {% for activity in activities %}
+    <div class="col-sm-6 my-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ activity.name }}</h5>
+          <p class="card-text">
+            Dátum: {{ activity.start_date |date("d/m/Y")}} <br>
+            Čas začiatku: {{ activity.start_date |date("H:i:s") }}<br>
+            Čas konca: {{ activity.end_date |date("H:i:s") }}<br>
+            {% if activity.hasReservation %}
+              <strong>Už ste prihlásený</strong>
+            {% endif %}
+          </p>
+          <button type="button" onclick="createReservation({{activity.id}})" class="btn btn-primary">Idem</button>
         </div>
-    {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
 </div>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+  function createReservation(id) {
+    console.log(+id)
+    fetch('/reservation', 
+      {
+        method: 'post',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          activity_id: +id
+        })
+      }
+    )
+    .then(res => {
+      if (res.status === 409) {
+        return flashMessage('info', 'Už ste na cvičenie prihlásený.')
+      } else if (!res.ok) {
+        throw res;
+      } else {
+        return res.json()
+      }
+    })
+    .then(json => {
+      flashMessage('success', 'Úspešne ste sa zaregistrovali na cvičenie.')
+    })
+    .catch(err => {
+      flashMessage('danger', 'Nastala systémová chyba, opakujte prosím akciu znova.')
+    })
+  }
+  
+</script>
 {% endblock %}
