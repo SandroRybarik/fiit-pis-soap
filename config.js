@@ -28,7 +28,7 @@ module.exports = {
   WSDL_VALIDATOR,
   WSDL_CITIES_SK,
   roles: {
-    ADMIN: 1,
-    USER: 0
+    TRAINER: 'TRAINER',
+    USER: 'USER'
   }
 }

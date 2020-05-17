@@ -9,6 +9,7 @@ const {
 
 module.exports = {
     validateEmail: require('./mailValidation'),
+    validatePhone: require('./phoneValidation'),
     invalidDateFormat,
     pastDate,
     invalidDateOrder,

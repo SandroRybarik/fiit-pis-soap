@@ -55,8 +55,6 @@ const showCreateActivity = async (req, res) => {
 };
 
 const showAllActivities = async (req, res) => {
-  const userId = req.user.id;
-
   try {
     const {
       activitys: { activity = [] },
@@ -67,12 +65,12 @@ const showAllActivities = async (req, res) => {
       "getByAttributeValue",
       {
         attribute_name: "user_id",
-        attribute_value: userId,
+        attribute_value: req.user.id,
         ids: [0],
       }
     );
-
     const {reservation = []} = reservations || {}
+
     console.log(attachHasReservation(activity, reservation));
     res.render("pages/activity/show_all", {
       activities: attachHasReservation(activity, reservation),
